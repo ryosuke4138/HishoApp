@@ -1,41 +1,26 @@
-import React, { Component } from 'react';
+import React from 'react'
+import { Route, Link } from 'react-router-dom'
+import Task from './components/Task'
+import TodoApp from './containers/TodoApp'
 
-const list = [
-  {
-    id: 1,
-    title: '1st Item',
-    description: 'Description here.'
-  },
-  {
-    id: 2,
-    title: '2nd Item',
-    description: 'Another description here.'
-  },
-  {
-    id: 3,
-    title: '3rd Item',
-    description: 'Third description here.'
-  }
-];
+export default function App() {
+  return (
+    <div className="App">
+      {/* category names and IDs are hard coded */}
+      <ul>
+        <li><Link to="/all">All Categories</Link></li>
+        <li><Link to="/category/2502">personal computer</Link></li>
+        <li><Link to="/category/10002">book</Link></li>
+      </ul>
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { list };
-  }
-
-  render() {
-    return (
-      <div>
-        {this.state.list.map(item => (
-          <div>
-            <h1>{item.title}</h1>
-            <span>{item.description}</span>
-          </div>
-        ))}
-      </div>
-    );
-  }
+      {/* Route of Task */}
+      <Route path="/all" component={Task} />
+      <Route path="/category/:id"
+        render={
+          ({match}) => <Task categoryId={match.params.id} />
+        }
+      />
+      <TodoApp />
+    </div>
+  )
 }
-
-export default App;
