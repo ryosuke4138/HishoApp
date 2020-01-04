@@ -1,23 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types'
+import TasksPage from './TasksPage';
+import FlashMessage from './FlashMessage';
+import 'antd/dist/antd.css';
 
-export default function TodoApp({ task, tasks, inputTask, addTask }) {
+export default function TodoApp({ createTask, editTask, deleteTask, fetchTasks }) {
   return (
     <div>
-      <input type="text" onChange={(e) => inputTask(e.target.value)} />
-      <input type="button" value="add" onClick={() => addTask(task)} />
-      <ul>
-        {
-          tasks.map(function(item, i) {
-            return (
-              <li key={i}>{item}</li>
-            );
-          })
-        }
-      </ul>
+      {/* {this.props.error && <FlashMessage message={this.props.error} />} */}
+      <div>
+        <TasksPage />
+      </div>
     </div>
-  )
-}
-TodoApp.propTypes = {
-  name: PropTypes.string
+  );
 }
