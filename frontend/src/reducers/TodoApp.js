@@ -1,6 +1,7 @@
 const initialState = {
-  task: '',
-  tasks: []
+  tasks: [],
+  isLoading: false,
+  error: null,
 }
 
 export default (state = initialState, action) => {

@@ -17,12 +17,12 @@ const TaskList = props => {
             ))}
           </select>
           <Button type="danger" onClick={()=>{props.onDeleteTask(item.id)}}>
-            タスク削除
+            Delete Task
           </Button>
         </List.Item>
       )}
     />
-  );
+  )
 
   function onStatusChange(e, id) {
     props.onStatusChange(id, e.target.value);

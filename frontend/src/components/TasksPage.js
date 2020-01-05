@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { Form, Input, Icon, Button } from 'antd';
+import { Button } from 'antd';
 
 import TaskList from './TaskList';
+import { WrappedAddTaskForm } from './AddTaskForm';
 import { TASK_STATUSES } from '../constants/tasks';
 
 class TasksPage extends Component {
@@ -28,7 +29,7 @@ class TasksPage extends Component {
     return (
       <div>
         <div>
-          <Button type="primary" onClick={this.toggleForm}>＋タスク追加</Button>
+          <Button type="primary" onClick={this.toggleForm}>Add Task</Button>
         </div>
         {this.state.showNewCardForm && <WrappedAddTaskForm onCreateTask={this.props.onCreateTask} />}
         <div>
@@ -56,63 +57,3 @@ class TasksPage extends Component {
 }
 
 export default TasksPage;
-
-
-
-class AddTaskForm extends React.Component {
-  componentDidMount() {
-    // To disabled submit button at the beginning.
-    this.props.form.validateFields();
-  }
-
-  handleSubmit = e => {
-    e.preventDefault();
-    this.props.form.validateFields((err, values) => {
-      if (!err) {
-        console.log('Received values of form: ', values);
-        this.props.onCreateTask(values)
-      }
-    });
-  };
-
-  render() {
-    const { getFieldDecorator, getFieldError, isFieldTouched } = this.props.form;
-
-    // Only show error after a field is touched.
-    const taskError = isFieldTouched('task') && getFieldError('task');
-    const descriptionError = isFieldTouched('description') && getFieldError('description');
-    const buttonDisable = getFieldError('task') || getFieldError('description')
-
-    return (
-      <Form layout="inline" onSubmit={this.handleSubmit}>
-        <Form.Item validateStatus={taskError ? 'error' : ''} help={taskError || ''}>
-          {getFieldDecorator('task', {
-            rules: [{ required: true, message: 'taskを入力してください！' }],
-          })(
-            <Input
-              prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-              placeholder="task"
-            />,
-          )}
-        </Form.Item>
-        <Form.Item validateStatus={descriptionError ? 'error' : ''} help={descriptionError || ''}>
-          {getFieldDecorator('description', {
-            rules: [{ required: true, message: 'descriptionを入力してください！' }],
-          })(
-            <Input
-              prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
-              placeholder="description"
-            />,
-          )}
-        </Form.Item>
-        <Form.Item>
-          <Button type="primary" htmlType="submit" disabled={buttonDisable}>
-            タスク追加
-          </Button>
-        </Form.Item>
-      </Form>
-    );
-  }
-}
-
-const WrappedAddTaskForm = Form.create({ name: 'add_task_form' })(AddTaskForm);

@@ -4,7 +4,7 @@ import { createTask, editTask, deleteTask, fetchTasks, onStatusChange, onCreateT
 
 function mapStateToProps(state) {
   return {
-    tasks: state.TodoApp.task,
+    tasks: state.TodoApp.tasks,
     isLoading: state.TodoApp.isLoading,
     error: state.TodoApp.error
   }
