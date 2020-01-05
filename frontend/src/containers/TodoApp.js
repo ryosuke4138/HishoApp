@@ -1,21 +1,28 @@
 import { connect } from 'react-redux';
 import TodoApp from '../components/TodoApp';
-import { inputTask, addTask } from '../actions/tasks';
+import { createTask, editTask, deleteTask, fetchTasks } from '../actions/TodoApp';
 
 function mapStateToProps(state) {
   return {
-    task: state.TodoApp.task,
-    tasks: state.TodoApp.tasks
+    tasks: state.TodoApp.tasks,
+    isLoading: state.TodoApp.isLoading,
+    error: state.TodoApp.error
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    addTask(task) {
-      dispatch(addTask(task));
+    fetchTasks() {
+      dispatch(fetchTasks());
     },
-    inputTask(task) {
-      dispatch(inputTask(task))
+    onCreateTask({title, description}) {
+      dispatch(createTask(title, description))
+    },
+    onStatusChange(id, status) {
+      dispatch(editTask(id, { status }))
+    },
+    onDeleteTask(id) {
+      dispatch(deleteTask(id))
     }
   }
 }
