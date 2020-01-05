@@ -13,7 +13,7 @@ SECRET_KEY = 'bepu72*9-+(a*87bl**!27@!lf!3=k$0c=s%-fe_xbbs_f^5+!'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1']
 
 
 # Application definition
@@ -116,6 +116,7 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.AllowAny',
     ],
+    'DATETIME_FORMAT': "%m/%d/%Y %H:%M:%S",
     'EXCEPTION_HANDLER': 'djangotodo.todos.utils.custom_exception_handler'
 }
 
