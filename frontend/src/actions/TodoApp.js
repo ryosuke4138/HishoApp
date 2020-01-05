@@ -48,7 +48,7 @@ function createTaskSucceeded(task) {
   };
 }
 
-export function createTask({ title, description, status = 'Unstarted' }) {
+export function createTask(title, description, status = 'Unstarted') {
   return dispatch => {
     api.createTask({ title, description, status }).then(resp => {
       dispatch(createTaskSucceeded(resp.data));
