@@ -4,7 +4,9 @@ import TasksPage from './TasksPage';
 import FlashMessage from './FlashMessage';
 import 'antd/dist/antd.css';
 
-export default function TodoApp({tasks, isLoading, error, onCreateTask, onStatusChange}) {
+export default function TodoApp({tasks, isLoading, error, onCreateTask, onStatusChange, onDeleteTask}) {
+  console.log();
+  
   return (
     <div>
       {error && <FlashMessage message={error} />}
@@ -13,6 +15,7 @@ export default function TodoApp({tasks, isLoading, error, onCreateTask, onStatus
           tasks={tasks} 
           onCreateTask={onCreateTask}
           onStatusChange={onStatusChange}
+          onDeleteTask={onDeleteTask}
           isLoading={isLoading} 
         />
       </div>
