@@ -11,6 +11,7 @@ class TasksPage extends Component {
     this.state = {
       showNewCardForm: false,
     };
+    this.props.fetchTasks();
   }
 
   toggleForm = () => {
