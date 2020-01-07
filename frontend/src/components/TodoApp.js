@@ -12,6 +12,7 @@ export default function TodoApp({tasks, isLoading, error, fetchTasks, onCreateTa
       {error && <FlashMessage message={error} />}
       <div>
         <TasksPage 
+          key={tasks} 
           tasks={tasks} 
           fetchTasks={fetchTasks}
           onCreateTask={onCreateTask}
