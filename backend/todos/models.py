@@ -7,9 +7,10 @@ from django.db import models
 class Todo(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField(blank=True)
-    status = models.CharField(
-        default='Unstarted',
-        max_length=100
+    TASK_STATUSES = ((0, 'Unstarted'), (1, 'In Progress'), (2, 'Completed'))
+    status = models.IntegerField(
+        default=0,
+        choices=TASK_STATUSES
     )
     # category = models.IntegerField(
     #     blank=True,

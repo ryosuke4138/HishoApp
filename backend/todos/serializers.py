@@ -10,5 +10,8 @@ class TodoSerializer(serializers.ModelSerializer):
             'title',
             'description',
             'status',
+            'created_at',
+            'deadline',
+            'completed_at'
         )
         model = models.Todo
