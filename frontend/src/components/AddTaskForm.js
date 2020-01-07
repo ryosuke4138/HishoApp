@@ -22,8 +22,8 @@ class AddTaskForm extends React.Component {
 
     // Only show error after a field is touched.
     const titleError = isFieldTouched('title') && getFieldError('title');
-    const descriptionError = isFieldTouched('description') && getFieldError('description');
-    const buttonDisable = getFieldError('title') || getFieldError('description')
+    // const descriptionError = isFieldTouched('description') && getFieldError('description');
+    const buttonDisable = getFieldError('title') // || getFieldError('description')
 
     return (
       <Form layout="inline" onSubmit={this.handleSubmit}>
@@ -37,15 +37,11 @@ class AddTaskForm extends React.Component {
             />,
           )}
         </Form.Item>
-        <Form.Item validateStatus={descriptionError ? 'error' : ''} help={descriptionError || ''}>
-          {getFieldDecorator('description', {
-            rules: [{ required: true, message: 'description is required' }],
-          })(
-            <Input
-              prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
-              placeholder="description"
-            />,
-          )}
+        <Form.Item>
+          <Input
+            prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
+            placeholder="description"
+          />
         </Form.Item>
         <Form.Item>
           <Button type="primary" htmlType="submit" disabled={buttonDisable}>

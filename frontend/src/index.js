@@ -5,6 +5,7 @@ import { ConnectedRouter } from 'react-router-redux'
 import { createBrowserHistory } from 'history'
 import App from './App'
 import createStore from './createStore'
+import 'antd/dist/antd.css';
 
 const history = createBrowserHistory() 
 const store = createStore(history)

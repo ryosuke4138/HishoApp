@@ -14,7 +14,10 @@ class Command():
                   'description': description}
         res = requests.post(url, payload)
         data = res.json()
-        print('task created(id={})\n{}: {}'.format(data['id'], data['title'], data['description']))
+        print('task created(id={})'.format(data['id']))
+        print('title:', data['title'])
+        if data['description']:
+            print('description:', data['description'])
         return res
 
     def show(self):
@@ -22,8 +25,9 @@ class Command():
         res = requests.get(url)
         for todo in res.json():
             print(str(todo['id']) + ': ' + str(todo['title']))
-            print('  ', todo['description'])
             print('  ', todo['status'])
+            if todo['description']:
+                print('  ', todo['description'])
         return res
 
     def get(self):
@@ -65,11 +69,12 @@ class Parse():
         if self.error_msg != '':
             raise Exception("{} required.".format(self.error_msg))
 
-    def get_arg(self, attr, short_attr=''):
+    def get_arg(self, attr, short_attr='', is_required=True):
         for i, arg in enumerate(self.args):
             if (arg == attr or arg == short_attr) and len(self.args) > i:
                 return self.args[i+1]
-        self.add_error_message(attr)
+        if is_required:
+            self.add_error_message(attr)
     
     def check_status(self, status):
         status_list = ['add', 'start', 'end']
@@ -78,7 +83,7 @@ class Parse():
 
     def create(self):
         title = self.get_arg('--title', '-t')
-        description = self.get_arg('--description', '-d')
+        description = self.get_arg('--description', '-d', is_required=False)
         self.raise_error()
         return title, description
 
