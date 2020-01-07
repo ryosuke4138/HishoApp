@@ -34,23 +34,25 @@ class TasksPage extends Component {
         </div>
         {this.state.showNewCardForm && <WrappedAddTaskForm onCreateTask={this.props.onCreateTask} />}
         <div>
-          {TASK_STATUSES.map(status => {
-            const statusTasks = this.props.tasks.filter(
-              task => task.status === status
-            );
-            return (
-            <div style={{ margin: "25px 20px 25px 20px" }}>
-              <h2>{status}</h2>
-              <TaskList
-                key={status}
-                status={status}
-                tasks={statusTasks}
-                onStatusChange={this.props.onStatusChange}
-                onDeleteTask={this.props.onDeleteTask}
-              />
-            </div>
-            );
-          })}
+          {
+            TASK_STATUSES.map(status => {
+              const statusTasks = this.props.tasks.filter(
+                task => task.status === status
+              );
+              return (
+                <div style={{ margin: "25px 20px 25px 20px" }}>
+                  <h2>{status}</h2>
+                  <TaskList
+                    key={status}
+                    status={status}
+                    tasks={statusTasks}
+                    onStatusChange={this.props.onStatusChange}
+                    onDeleteTask={this.props.onDeleteTask}
+                  />
+                </div>
+              );
+            })
+          }
         </div>
       </div>
     );
