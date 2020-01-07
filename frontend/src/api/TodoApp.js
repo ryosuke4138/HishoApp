@@ -15,7 +15,6 @@ export function fetchTasks() {
 }
 
 export function createTask(params) {
-  console.log(params)
   return client.post('/api/', params);
 }
 

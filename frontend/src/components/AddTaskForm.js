@@ -29,7 +29,7 @@ class AddTaskForm extends React.Component {
       <Form layout="inline" onSubmit={this.handleSubmit}>
         <Form.Item validateStatus={titleError ? 'error' : ''} help={titleError || ''}>
           {getFieldDecorator('title', {
-            rules: [{ required: true, message: 'titleを入力してください！' }],
+            rules: [{ required: true, message: 'title is required' }],
           })(
             <Input
               prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
@@ -39,7 +39,7 @@ class AddTaskForm extends React.Component {
         </Form.Item>
         <Form.Item validateStatus={descriptionError ? 'error' : ''} help={descriptionError || ''}>
           {getFieldDecorator('description', {
-            rules: [{ required: true, message: 'descriptionを入力してください！' }],
+            rules: [{ required: true, message: 'description is required' }],
           })(
             <Input
               prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
