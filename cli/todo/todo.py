@@ -4,7 +4,7 @@ API_BASE_URL = 'http://127.0.0.1:8000'
 
 class Command():
     def __init__(self, args):
-        self.args = args()
+        self.args = args
 
     def create(self):
         title, description = self.args
@@ -72,7 +72,7 @@ class Parse():
 def parse_args(command, args):
     """return arguments which suits the command"""
     args = getattr(Parse(args), command)
-    return args
+    return args()
 
 def main():
     # read command
