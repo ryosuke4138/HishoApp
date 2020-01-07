@@ -1,4 +1,5 @@
 import sys
+import requests
 
 API_BASE_URL = 'http://127.0.0.1:8000'
 
@@ -8,22 +9,49 @@ class Command():
 
     def create(self):
         title, description = self.args
-        txt = 'create(title="{}", description="{}")'.format(title, description)
-        print(txt)
+        url = API_BASE_URL + '/api/'
+        payload = {'title': title,
+                  'description': description}
+        res = requests.post(url, payload)
+        data = res.json()
+        print('task created(id={})\n{}: {}'.format(data['id'], data['title'], data['description']))
+        return res
 
     def show(self):
-        txt = 'show'
-        print(txt)
+        url = API_BASE_URL + '/api/'
+        res = requests.get(url)
+        for todo in res.json():
+            print(str(todo['id']) + ': ' + str(todo['title']))
+            print('  ', todo['description'])
+            print('  ', todo['status'])
+        return res
+
+    def get(self):
+        url = API_BASE_URL + '/api/'
+        return(requests.get(url))
 
     def edit(self):
         id, status = self.args
-        txt = 'edit(id="{}", status="{}")'.format(id, status)
-        print(txt)
+        url = API_BASE_URL + '/api/{}/'.format(id)
+        status_list = {'add': 'Unstarted', 
+                       'start': 'In Progress', 
+                       'end': 'Completed'}
+        res = self.get()
+        for todo in res.json():
+            if str(todo['id']) == str(id):
+                payload = {'id': id,
+                        'title': todo['title'],
+                        'description': todo['description'],
+                        'status': status_list[status]}
+        res = requests.put(url, payload)
+        print('edited' if res.ok else 'some error occurred')
+        return res
 
     def delete(self):
         id = self.args
-        txt = 'delete(id="{}")'.format(id)
-        print(txt)
+        url = API_BASE_URL + '/api/{}/'.format(id)
+        res = requests.delete(url)
+        print('deleted' if res.ok else 'some error occurred')
 
 class Parse():
     def __init__(self, args):
@@ -44,7 +72,7 @@ class Parse():
         self.add_error_message(attr)
     
     def check_status(self, status):
-        status_list = ['unstarted', 'inprogress', 'completed']
+        status_list = ['add', 'start', 'end']
         if status not in status_list:
             raise Exception("status not found in the list {}".format(status_list))
 
