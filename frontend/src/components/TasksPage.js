@@ -1,22 +1,23 @@
 import React, { Component } from 'react';
-import { Button } from 'antd';
+import Button from '@material-ui/core/Button';
 
 import TaskList from './TaskList';
-import { WrappedAddTaskForm } from './AddTaskForm';
+// import { WrappedAddTaskForm } from './AddTaskForm';
+import { AddTaskForm } from './AddTaskForm'; //demo
 import { TASK_STATUSES } from '../constants/tasks';
 
 class TasksPage extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       showNewCardForm: false,
-    };
-    this.props.fetchTasks();
+    }
+    this.props.fetchTasks()
   }
 
   toggleForm = () => {
     this.setState({ showNewCardForm: !this.state.showNewCardForm });
-  };
+  }
 
   render() {
     if (this.props.isLoading) {
@@ -30,9 +31,12 @@ class TasksPage extends Component {
     return (
       <div>
         <div>
-          <Button type="primary" onClick={this.toggleForm}>Add Task</Button>
+          <Button variant="contained" color="primary" onClick={this.toggleForm}>
+            New Task
+          </Button>
         </div>
-        {this.state.showNewCardForm && <WrappedAddTaskForm onCreateTask={this.props.onCreateTask} />}
+        {/* {this.state.showNewCardForm && <WrappedAddTaskForm onCreateTask={this.props.onCreateTask} />} */}
+        <AddTaskForm /> {/* demo */}
         <div>
           {
             TASK_STATUSES.map(status => {
