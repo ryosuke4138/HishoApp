@@ -34,7 +34,7 @@ class TasksPage extends Component {
             New Task
           </Button>
         </div>
-        {this.state.showNewCardForm && <AddTaskReduxForm onSubmit={this.props.onCreateTask}/>}
+        {this.state.showNewCardForm && <AddTaskReduxForm onCreateTask={this.props.onCreateTask}/>}
         <div>
           {
             TASK_STATUSES.map(status => {

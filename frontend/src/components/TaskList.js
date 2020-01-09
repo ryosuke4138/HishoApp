@@ -4,7 +4,6 @@ import { TASK_STATUSES } from '../constants/tasks';
 
 
 const TaskList = props => {
-  console.log(props.tasks)
   return (
     <List
       grid={{ gutter: 16, column: 4 }}
@@ -12,8 +11,9 @@ const TaskList = props => {
       renderItem={item => (
       <List.Item>
         <Card title={item.title}>
-          {item.description}
-          <span>deadline: {item.deadline}</span>
+          <p>{item.description}</p>
+          <p>deadline: {item.deadline}</p>
+          <p>category: {item.category}</p>
         </Card>
         <select value={item.status} onChange={(e) => {onStatusChange(e, item.id)}}>
           {TASK_STATUSES.map(status => (

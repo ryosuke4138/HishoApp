@@ -21,18 +21,16 @@ const MaterialTextField = ({
   const classes = useStyles()
 
   return (
-    <form className={classes.root} noValidate autoComplete="off">
-      <TextField 
-        id="standard-basic" 
-        required={required}
-        error={!!(touched && error)}
-        label={label} 
-        type={type}
-        variant="outlined" 
-        helperText={!!(touched && error)}
-        {...input}
-      />
-    </form>
+    <TextField 
+      id={label} 
+      required={required}
+      error={!!(touched && error)}
+      label={label} 
+      type={type}
+      variant="outlined" 
+      helperText={!!(touched && error)}
+      {...input}
+    />
   )
 }
 

@@ -1,23 +1,74 @@
-import React, { useState } from "react"
-import { DateTimePicker, MuiPickersUtilsProvider } from "@material-ui/pickers"
-import DateFnsUtils from "@date-io/date-fns"
+// import React, { useState } from "react"
+// import { DateTimePicker } from "@material-ui/pickers"
 
-function MaterialTimeField() {
-  const [selectedDate, handleDateChange] = useState(new Date())
+// const MaterialTimeField = ({
+//   input,
+//   label,
+//   meta: { touched, error },
+//   required = false,
+// }) => {
+//   console.log(new Date())
+//   const [selectedDate, handleDateChange] = useState(new Date())
+
+//   return (
+//     <DateTimePicker
+//       ampm={false}
+//       autoOk
+//       disablePast
+//       onChange={handleDateChange}
+//       label={label}
+//       showTodayButton
+//       required={required}
+//       value={selectedDate}
+//       helperText={!!(touched && error)}
+//       {...input}
+//     />
+//   )
+// }
+
+// export default MaterialTimeField
+
+import 'date-fns';
+import React from 'react';
+import Grid from '@material-ui/core/Grid';
+import DateFnsUtils from '@date-io/date-fns';
+import {
+  MuiPickersUtilsProvider,
+  KeyboardTimePicker,
+  KeyboardDatePicker,
+} from '@material-ui/pickers';
+
+const MaterialTimeField = (
+  input
+) => {
+  // The first commit of Material-UI
+  const [selectedDate, setSelectedDate] = React.useState(new Date('2014-08-18T21:11:54'));
+
+  const handleDateChange = date => {
+    console.log(date)
+    setSelectedDate(date);
+  };
 
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
-      <DateTimePicker
-        ampm={false}
-        autoOk
-        value={selectedDate}
-        disablePast
-        onChange={handleDateChange}
-        label="Deadline"
-        showTodayButton
-      />
+      <Grid container justify="space-around">
+        <KeyboardDatePicker
+          disableToolbar
+          variant="inline"
+          format="MM/dd/yyyy"
+          margin="normal"
+          id="date-picker-inline"
+          label="Date picker inline"
+          value={selectedDate}
+          onChange={handleDateChange}
+          KeyboardButtonProps={{
+            'aria-label': 'change date',
+          }}
+          {...selectedDate}
+        />
+      </Grid>
     </MuiPickersUtilsProvider>
-  )
+  );
 }
 
 export default MaterialTimeField

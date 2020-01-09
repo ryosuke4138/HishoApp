@@ -5,8 +5,6 @@ import FlashMessage from './FlashMessage';
 import 'antd/dist/antd.css';
 
 export default function TodoApp({tasks, isLoading, error, fetchTasks, onCreateTask, onStatusChange, onDeleteTask}) {
-  console.log();
-  
   return (
     <div>
       {error && <FlashMessage message={error} />}

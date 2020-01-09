@@ -15,8 +15,9 @@ function mapDispatchToProps(dispatch) {
     fetchTasks() {
       dispatch(fetchTasks());
     },
-    onCreateTask({title, description}) {
-      dispatch(createTask(title, description))
+    onCreateTask({title, description, deadline}) {
+      console.log('onCreateTask')
+      dispatch(createTask(title, description, deadline))
     },
     onStatusChange(id, status) {
       dispatch(editTask(id, { status }))
