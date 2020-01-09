@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Button from '@material-ui/core/Button';
 
 import TaskList from './TaskList';
-// import { WrappedAddTaskForm } from './AddTaskForm';
 import { AddTaskReduxForm } from './AddTaskForm'; //demo
 import { TASK_STATUSES } from '../constants/tasks';
 
@@ -35,8 +34,7 @@ class TasksPage extends Component {
             New Task
           </Button>
         </div>
-        {/* {this.state.showNewCardForm && <WrappedAddTaskForm onCreateTask={this.props.onCreateTask} />} */}
-        {this.state.showNewCardForm && <AddTaskReduxForm onCreateTask={this.props.onCreateTask}/>}
+        {this.state.showNewCardForm && <AddTaskReduxForm onSubmit={this.props.onCreateTask}/>}
         <div>
           {
             TASK_STATUSES.map(status => {
