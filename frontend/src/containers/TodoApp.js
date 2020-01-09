@@ -1,6 +1,6 @@
-import { connect } from 'react-redux';
-import TodoApp from '../components/TodoApp';
-import { createTask, editTask, deleteTask, fetchTasks } from '../actions/TodoApp';
+import { connect } from 'react-redux'
+import TodoApp from '../components/TodoApp'
+import { createTask, editTask, deleteTask, fetchTasks } from '../actions/TodoApp'
 
 function mapStateToProps(state) {
   return {
@@ -27,4 +27,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(TodoApp);
+export default connect(mapStateToProps, mapDispatchToProps)(TodoApp)

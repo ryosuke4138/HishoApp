@@ -11,12 +11,27 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-const MaterialTextField = props => {
+const MaterialTextField = ({
+  input,
+  label,
+  meta: { touched, error },
+  type='text',
+  required = false,
+}) => {
   const classes = useStyles()
 
   return (
     <form className={classes.root} noValidate autoComplete="off">
-      <TextField id="standard-basic" label={props.labelName} variant="outlined" required={props.required}/>
+      <TextField 
+        id="standard-basic" 
+        required={required}
+        error={!!(touched && error)}
+        label={label} 
+        type={type}
+        variant="outlined" 
+        helperText={!!(touched && error)}
+        {...input}
+      />
     </form>
   )
 }
