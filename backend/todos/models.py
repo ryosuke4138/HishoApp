@@ -4,22 +4,24 @@ from django.db import models
 class Category(models.Model):
     name = models.CharField(max_length=20)
 
-def return_tuple():
-    return (('u', 'Unstar'), ('i', 'In Progr'), ('c', 'Comple'))
+    def __str__(self):
+        return self.name
 
 class Todo(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField(blank=True)
     TASK_STATUSES = (('Unstarted', 'Unstarted'), ('In Progress', 'In Progress'), ('Completed', 'Completed'))
     status = models.CharField(
-        default=0,
+        default='',
         max_length=20,
         choices=TASK_STATUSES 
     )
-    category = models.CharField(
-        default=0,
-        max_length=20,
-        choices=return_tuple()
+    category = models.ForeignKey(
+        Category, 
+        on_delete=models.CASCADE, 
+        related_name="category",
+        blank=True,
+        null=True
     )
     created_at = models.DateTimeField(
         blank=True,
