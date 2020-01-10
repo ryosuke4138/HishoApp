@@ -1,8 +1,8 @@
 from django.db import models
 
 
-# def CATEGORY():
-#     return (('a', 'A'), ('b', 'B'), ('c', 'C'))
+class Category(models.Model):
+    name = models.CharField(max_length=20)
 
 def return_tuple():
     return (('u', 'Unstar'), ('i', 'In Progr'), ('c', 'Comple'))
