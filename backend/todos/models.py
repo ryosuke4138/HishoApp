@@ -4,6 +4,9 @@ from django.db import models
 # def CATEGORY():
 #     return (('a', 'A'), ('b', 'B'), ('c', 'C'))
 
+def return_tuple():
+    return (('u', 'Unstar'), ('i', 'In Progr'), ('c', 'Comple'))
+
 class Todo(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField(blank=True)
@@ -11,12 +14,13 @@ class Todo(models.Model):
     status = models.CharField(
         default=0,
         max_length=20,
-        choices=TASK_STATUSES
+        choices=TASK_STATUSES 
     )
-    # category = models.IntegerField(
-    #     blank=True,
-    #     choices=CATEGORY
-    # )
+    category = models.CharField(
+        default=0,
+        max_length=20,
+        choices=return_tuple()
+    )
     created_at = models.DateTimeField(
         blank=True,
         null=True,

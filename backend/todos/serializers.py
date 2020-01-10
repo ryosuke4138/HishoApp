@@ -10,6 +10,7 @@ class TodoSerializer(serializers.ModelSerializer):
             'title',
             'description',
             'status',
+            'category',
             'created_at',
             'deadline',
             'completed_at'
