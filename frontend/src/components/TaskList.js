@@ -3,7 +3,8 @@ import { List, Card, Button } from 'antd';
 import { TASK_STATUSES } from '../constants/tasks';
 
 const categoryIdToName = (id, categories) => {
-  return categories.find(c => c.id === id).name
+  const category = categories.find(c => c.id === id)
+  return category ? category.name : null
 }
 
 const TaskList = props => {

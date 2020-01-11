@@ -91,16 +91,8 @@ function deleteCategorySucceeded(id) {
   }
 }
 
-function getTasksById(id, getState) {
-  return getState().TodoApp.tasks.filter(task => task.category === id)
-}
-
 export function deleteCategory(id) {
   return (dispatch, getState) => {
-    const tasks = getTasksById(id, getState)
-    tasks.map(task => 
-      actionsTodoApp.deleteTask(task.id)
-    )
     api.deleteCategory(id).then(resp => {
       dispatch(deleteCategorySucceeded(id));
     })

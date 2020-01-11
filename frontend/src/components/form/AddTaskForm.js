@@ -1,17 +1,19 @@
 import React from 'react'
 import Button from '@material-ui/core/Button'
 import CloseIcon from '@material-ui/icons/Close';
-import MaterialTextField from './form/TextField'
-// import MaterialTimeField from './form/TimeField'
-// import renderCalenderField from './form/Home'
+import MaterialTextField from './TextField'
+import AlertDialog from './Alert'
+// import MaterialTimeField from './TimeField'
+// import renderCalenderField from './Home'
 import Radio from '@material-ui/core/Radio'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
-import renderRadio from './form/Radio'
+import renderRadio from './Radio'
 import { reduxForm, Field } from 'redux-form'
 
 class AddTaskForm extends React.Component {
   categoryNameToId = (name) => {
-    return this.props.categories.find(c => c.name === name).id
+    const category = this.props.categories.find(c => c.name === name)
+    return category ? category.id : null
   }
 
   submit = (values) => {
@@ -26,7 +28,7 @@ class AddTaskForm extends React.Component {
   }
 
   render() {
-    const { handleSubmit, pristine, submitting, reset, onDeleteCategory } = this.props
+    const { handleSubmit, pristine, submitting, reset, tasks, categories, onDeleteTask, onDeleteCategory } = this.props
     return (
       <form onSubmit={handleSubmit(this.submit)}>
         <div style={{width: 400, display: 'flex', flexDirection: 'column'}} >
@@ -37,11 +39,16 @@ class AddTaskForm extends React.Component {
           {/* <Field name="deadline" component={MaterialTimeField} /> */}
           {/* <Field name="deadline" component={renderCalendarField} label="DEPARTURE" minDate={startDate} /> */}
           <Field name='category' label='Category' component={renderRadio} required >
-            {this.props.categories.map(c => (
+            {categories.map(category => (
               <div>
-                <FormControlLabel value={c.name} control={<Radio />} label={c.name} />
-                <CloseIcon type='button' size='small' variant='contained' color='primary' onClick={() => onDeleteCategory(c.id)} />
-                <br />
+                <FormControlLabel value={category.name} control={<Radio />} label={category.name} />
+                <AlertDialog onDeleteCategory={() => {
+                  const categoryTasks = tasks.filter(task => task.category === category.id)
+                  categoryTasks.map(task => (
+                    onDeleteTask(task.id)
+                  ))
+                  onDeleteCategory(category.id) 
+                }} />
               </div>
             ))}
           </Field>

@@ -1,12 +1,13 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
+import CloseIcon from '@material-ui/icons/Close';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-export default function AlertDialog() {
+const AlertDialog = (props) => {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -17,11 +18,14 @@ export default function AlertDialog() {
     setOpen(false);
   };
 
+  const deleteCategory = () => {
+    props.onDeleteCategory()
+    handleClose();
+  };
+
   return (
     <div>
-      <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-        Open alert dialog
-      </Button>
+      <CloseIcon type='button' size='small' variant='contained' color='primary' onClick={handleClickOpen} />
       <Dialog
         open={open}
         onClose={handleClose}
@@ -37,13 +41,15 @@ export default function AlertDialog() {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
-            Disagree
+            Back
           </Button>
-          <Button onClick={handleClose} color="primary" autoFocus>
-            Agree
+          <Button onClick={deleteCategory} color="primary" autoFocus>
+            Delete
           </Button>
         </DialogActions>
       </Dialog>
     </div>
   );
 }
+
+export default AlertDialog

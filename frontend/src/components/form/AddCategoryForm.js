@@ -1,6 +1,6 @@
 import React from 'react'
 import Button from '@material-ui/core/Button'
-import MaterialTextField from './form/TextField'
+import MaterialTextField from './TextField'
 import { reduxForm, Field } from 'redux-form'
 
 class AddCategoryForm extends React.Component {

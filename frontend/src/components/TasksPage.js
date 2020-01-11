@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import Button from '@material-ui/core/Button'
 
 import TaskList from './TaskList';
-import { AddTaskReduxForm } from './AddTaskForm'
-import { AddCategoryReduxForm } from './AddCategoryForm'
+import { AddTaskReduxForm } from './form/AddTaskForm'
+import { AddCategoryReduxForm } from './form/AddCategoryForm'
 import { TASK_STATUSES } from '../constants/tasks'
 
 class TasksPage extends Component {
@@ -40,13 +40,28 @@ class TasksPage extends Component {
             New Category
           </Button>
         </div>
-        {this.state.showNewCategoryCardForm && <AddCategoryReduxForm categories={this.props.categories} onCreateCategory={this.props.onCreateCategory} endForm={this.toggleCategoryForm} />}
+        {this.state.showNewCategoryCardForm && 
+          <AddCategoryReduxForm 
+            categories={this.props.categories} 
+            onCreateCategory={this.props.onCreateCategory} 
+            endForm={this.toggleCategoryForm} 
+        />}
+
         <div>
           <Button variant="contained" color="primary" onClick={this.toggleTaskForm}>
             New Task
           </Button>
         </div>
-        {this.state.showNewTaskCardForm && <AddTaskReduxForm categories={this.props.categories} onCreateTask={this.props.onCreateTask} onDeleteCategory={this.props.onDeleteCategory} />}
+        {this.state.showNewTaskCardForm && 
+          <AddTaskReduxForm 
+            tasks={this.props.tasks} 
+            categories={this.props.categories} 
+            categories={this.props.categories} 
+            onCreateTask={this.props.onCreateTask} 
+            onDeleteTask={this.props.onDeleteTask} 
+            onDeleteCategory={this.props.onDeleteCategory} 
+        />}
+
         <div>
           {
             TASK_STATUSES.map(status => {
