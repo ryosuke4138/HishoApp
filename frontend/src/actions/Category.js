@@ -1,4 +1,5 @@
 import * as api from '../api/Category';
+import * as actionsTodoApp from './TodoApp';
 
 function fetchCategoriesSucceeded(categories) {
   return {
@@ -45,7 +46,7 @@ function createCategorySucceeded(category) {
     payload: {
       category,
     },
-  };
+  }
 }
 
 export function createCategory(name) {
@@ -54,8 +55,8 @@ export function createCategory(name) {
   return dispatch => {
     api.createCategory({ name }).then(resp => {
       dispatch(createCategorySucceeded(resp.data));
-    });
-  };
+    })
+  }
 }
 
 function editCategorySucceeded(category) {
@@ -64,7 +65,7 @@ function editCategorySucceeded(category) {
     payload: {
       category,
     },
-  };
+  }
 }
 
 export function editCategory(id, params = {}) {
@@ -73,8 +74,8 @@ export function editCategory(id, params = {}) {
     const updatedCategory = Object.assign({}, category, params);
     api.editCategory(id, updatedCategory).then(resp => {
       dispatch(editCategorySucceeded(resp.data));
-    });
-  };
+    })
+  }
 }
 
 function getCategoryById(categories, id) {
@@ -87,14 +88,21 @@ function deleteCategorySucceeded(id) {
     payload: {
       id,
     },
-  };
+  }
+}
+
+function getTasksById(id, getState) {
+  return getState().TodoApp.tasks.filter(task => task.category === id)
 }
 
 export function deleteCategory(id) {
   return (dispatch, getState) => {
+    const tasks = getTasksById(id, getState)
+    tasks.map(task => 
+      actionsTodoApp.deleteTask(task.id)
+    )
     api.deleteCategory(id).then(resp => {
-      console.log(resp)
       dispatch(deleteCategorySucceeded(id));
-    });
-  };
+    })
+  }
 }

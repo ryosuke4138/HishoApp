@@ -2,6 +2,9 @@ import React from 'react';
 import { List, Card, Button } from 'antd';
 import { TASK_STATUSES } from '../constants/tasks';
 
+const categoryIdToName = (id, categories) => {
+  return categories.find(c => c.id === id).name
+}
 
 const TaskList = props => {
   return (
@@ -12,8 +15,8 @@ const TaskList = props => {
       <List.Item>
         <Card title={item.title}>
           <p>{item.description}</p>
-          <p>deadline: {item.deadline}</p>
-          <p>category: {item.category}</p>
+          {item.deadline && <p>deadline: {item.deadline.slice(0,-3)}</p>}
+          {item.category && <p>category: {categoryIdToName(item.category, props.categories)}</p>}
         </Card>
         <select value={item.status} onChange={(e) => {onStatusChange(e, item.id)}}>
           {TASK_STATUSES.map(status => (

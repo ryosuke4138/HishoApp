@@ -6,7 +6,7 @@ import { createCategory, editCategory, deleteCategory, fetchCategories } from '.
 function mapStateToProps(state) {
   return {
     tasks: state.TodoApp.tasks,
-    categories: state.TodoApp.categories,
+    categories: state.Category.categories,
     isLoading: state.TodoApp.isLoading,
     error: state.TodoApp.error
   }
@@ -17,9 +17,9 @@ function mapDispatchToProps(dispatch) {
     fetchTasks() {
       dispatch(fetchTasks());
     },
-    onCreateTask({title, description, deadline, category}) {
+    onCreateTask({title, description, deadline, category_id}) {
       console.log('onCreateTask')
-      dispatch(createTask(title, description, deadline, category))
+      dispatch(createTask(title, description, deadline, category_id))
     },
     onStatusChange(id, status) {
       dispatch(editTask(id, { status }))

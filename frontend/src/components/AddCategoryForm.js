@@ -8,8 +8,10 @@ class AddCategoryForm extends React.Component {
     const params = {
       name: values.name,
     }
-    // if(this.props.categories.some())
-    this.props.onCreateCategory(params)
+    if(!this.props.categories.some(c => c.name === values.name)) {
+      this.props.onCreateCategory(params)
+    }
+    this.props.endForm()
   }
 
   render() {

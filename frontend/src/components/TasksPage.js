@@ -40,13 +40,13 @@ class TasksPage extends Component {
             New Category
           </Button>
         </div>
-        {this.state.showNewCategoryCardForm && <AddCategoryReduxForm categories={this.props.categories} onCreateCategory={this.props.onCreateCategory}/>}
+        {this.state.showNewCategoryCardForm && <AddCategoryReduxForm categories={this.props.categories} onCreateCategory={this.props.onCreateCategory} endForm={this.toggleCategoryForm} />}
         <div>
           <Button variant="contained" color="primary" onClick={this.toggleTaskForm}>
             New Task
           </Button>
         </div>
-        {this.state.showNewTaskCardForm && <AddTaskReduxForm categories={this.props.categories} onCreateTask={this.props.onCreateTask}/>}
+        {this.state.showNewTaskCardForm && <AddTaskReduxForm categories={this.props.categories} onCreateTask={this.props.onCreateTask} onDeleteCategory={this.props.onDeleteCategory} />}
         <div>
           {
             TASK_STATUSES.map(status => {
@@ -60,8 +60,10 @@ class TasksPage extends Component {
                     key={status}
                     status={status}
                     tasks={statusTasks}
+                    categories={this.props.categories}
                     onStatusChange={this.props.onStatusChange}
                     onDeleteTask={this.props.onDeleteTask}
+                    onDeleteCategory={this.props.onDeleteCategory}
                   />
                 </div>
               );

@@ -14,7 +14,8 @@ export default function TodoApp({
   onStatusChange, 
   onDeleteTask,
   fetchCategories,
-  onCreateCategory
+  onCreateCategory,
+  onDeleteCategory,
 }) {
   return (
     <div>
@@ -30,6 +31,7 @@ export default function TodoApp({
           onDeleteTask={onDeleteTask}
           fetchCategories={fetchCategories}
           onCreateCategory={onCreateCategory}
+          onDeleteCategory={onDeleteCategory}
           isLoading={isLoading} 
         />
       </div>
