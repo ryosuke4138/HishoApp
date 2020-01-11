@@ -24,6 +24,9 @@ function mapDispatchToProps(dispatch) {
     onStatusChange(id, status) {
       dispatch(editTask(id, { status }))
     },
+    onStatusCompletedAtChange(id, status, completed_at) {
+      dispatch(editTask(id, { status, completed_at }))
+    },
     onDeleteTask(id) {
       dispatch(deleteTask(id))
     },

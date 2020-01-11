@@ -12,6 +12,7 @@ export default function TodoApp({
   fetchTasks, 
   onCreateTask, 
   onStatusChange, 
+  onStatusCompletedAtChange, 
   onDeleteTask,
   fetchCategories,
   onCreateCategory,
@@ -28,6 +29,7 @@ export default function TodoApp({
           fetchTasks={fetchTasks}
           onCreateTask={onCreateTask}
           onStatusChange={onStatusChange}
+          onStatusCompletedAtChange={onStatusCompletedAtChange}
           onDeleteTask={onDeleteTask}
           fetchCategories={fetchCategories}
           onCreateCategory={onCreateCategory}

@@ -70,8 +70,11 @@ function editTaskSucceeded(task) {
 
 export function editTask(id, params = {}) {
   return (dispatch, getState) => {
+    console.log(params)
     const task = getTaskById(getState().TodoApp.tasks, id)
     const updatedTask = Object.assign({}, task, params)
+    console.log(task)
+    console.log(updatedTask)
     api.editTask(id, updatedTask).then(resp => {
       dispatch(editTaskSucceeded(resp.data))
     })

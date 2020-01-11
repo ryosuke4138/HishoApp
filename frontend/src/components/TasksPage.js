@@ -77,6 +77,7 @@ class TasksPage extends Component {
                     tasks={statusTasks}
                     categories={this.props.categories}
                     onStatusChange={this.props.onStatusChange}
+                    onStatusCompletedAtChange={this.props.onStatusCompletedAtChange}
                     onDeleteTask={this.props.onDeleteTask}
                     onDeleteCategory={this.props.onDeleteCategory}
                   />

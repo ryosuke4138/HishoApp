@@ -19,7 +19,11 @@ const TaskList = props => {
           {item.deadline && <p>deadline: {item.deadline.slice(0,-3)}</p>}
           {item.category && <p>category: {categoryIdToName(item.category, props.categories)}</p>}
         </Card>
-        <select value={item.status} onChange={(e) => {onStatusChange(e, item.id)}}>
+        <select 
+          value={item.status} 
+          onChange={(e) => {
+            onStatusChange(e, item.id)
+          }}>
           {TASK_STATUSES.map(status => (
             <option key={status} value={status}>{status}</option>
           ))}
@@ -31,10 +35,16 @@ const TaskList = props => {
       )}
     />
   )
-
   function onStatusChange(e, id) {
-    props.onStatusChange(id, e.target.value);
+    const status = e.target.value
+    if(status === 'Completed') {
+      const d = new Date()
+      const completed_at = d.getFullYear() + '-' + (d.getMonth()+1) + '-' + d.getDate() + 'T' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds()
+      props.onStatusCompletedAtChange(id, status, completed_at)
+    } else {
+      props.onStatusChange(id, status)
+    }
   }
-};
+}
 
 export default TaskList
