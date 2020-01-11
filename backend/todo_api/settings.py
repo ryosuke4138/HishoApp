@@ -98,7 +98,8 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+# TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Tokyo'
 
 USE_I18N = True
 
@@ -117,9 +118,11 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.AllowAny',
     ],
     'DATETIME_FORMAT': "%m/%d/%Y %H:%M:%S",
-    'EXCEPTION_HANDLER': 'djangotodo.todos.utils.custom_exception_handler'
+    # 'EXCEPTION_HANDLER': 'backend.todo_api.utils.custom_exception_handler'
 }
 
-CORS_ORIGIN_WHITELIST = (
-    'localhost:3000/'
-)
+# CORS_ORIGIN_WHITELIST = (
+#     'localhost:3000/',
+#     'localhost:3000'
+# )
+CORS_ORIGIN_ALLOW_ALL = True

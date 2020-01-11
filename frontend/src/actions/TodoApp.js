@@ -6,7 +6,7 @@ function fetchTasksSucceeded(tasks) {
     payload: {
       tasks,
     },
-  };
+  }
 }
 
 function fetchTasksFailed(error) {
@@ -15,13 +15,13 @@ function fetchTasksFailed(error) {
     payload: {
       error,
     },
-  };
+  }
 }
 
 function fetchTasksStarted() {
   return {
     type: 'FETCH_TASKS_STARTED',
-  };
+  }
 }
 
 export function fetchTasks() {
@@ -35,8 +35,8 @@ export function fetchTasks() {
       })
       .catch(err => {
         dispatch(fetchTasksFailed(err.message));
-      });
-  };
+      })
+  }
 }
 
 function createTaskSucceeded(task) {
@@ -48,12 +48,15 @@ function createTaskSucceeded(task) {
   };
 }
 
-export function createTask(title, description, status = 'Unstarted') {
+export function createTask(title, description, deadline, category_id, status = 'Unstarted') {
+  console.log('action!!!')
+  console.log(title, description, deadline, category_id, status)
+  const category = category_id
   return dispatch => {
-    api.createTask({ title, description, status }).then(resp => {
+    api.createTask({ title, description, deadline, category, status }).then(resp => {
       dispatch(createTaskSucceeded(resp.data));
-    });
-  };
+    })
+  }
 }
 
 function editTaskSucceeded(task) {
@@ -62,17 +65,20 @@ function editTaskSucceeded(task) {
     payload: {
       task,
     },
-  };
+  }
 }
 
 export function editTask(id, params = {}) {
   return (dispatch, getState) => {
-    const task = getTaskById(getState().TodoApp.tasks, id);
-    const updatedTask = Object.assign({}, task, params);
+    console.log(params)
+    const task = getTaskById(getState().TodoApp.tasks, id)
+    const updatedTask = Object.assign({}, task, params)
+    console.log(task)
+    console.log(updatedTask)
     api.editTask(id, updatedTask).then(resp => {
-      dispatch(editTaskSucceeded(resp.data));
-    });
-  };
+      dispatch(editTaskSucceeded(resp.data))
+    })
+  }
 }
 
 function getTaskById(tasks, id) {
@@ -85,7 +91,7 @@ function deleteTaskSucceeded(id) {
     payload: {
       id,
     },
-  };
+  }
 }
 
 export function deleteTask(id) {
@@ -93,6 +99,6 @@ export function deleteTask(id) {
     api.deleteTask(id).then(resp => {
       console.log(resp)
       dispatch(deleteTaskSucceeded(id));
-    });
-  };
+    })
+  }
 }

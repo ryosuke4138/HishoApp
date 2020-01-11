@@ -1,11 +1,15 @@
 import React from 'react'
 import { Route, Link } from 'react-router-dom'
+import CssBaseline from '@material-ui/core/CssBaseline'
+import Header from './components/Header'
 import Task from './components/Task'
 import TodoApp from './containers/TodoApp'
 
 export default function App() {
   return (
     <div className="App">
+      <CssBaseline />
+      <Header />
       {/* category names and IDs are hard coded */}
       <ul>
         <li><Link to="/all">All Categories</Link></li>
