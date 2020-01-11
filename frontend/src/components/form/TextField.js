@@ -21,6 +21,7 @@ const MaterialTextField = ({
   const classes = useStyles()
 
   return (
+    <div>
     <TextField 
       id={label} 
       required={required}
@@ -31,6 +32,9 @@ const MaterialTextField = ({
       helperText={!!(touched && error)}
       {...input}
     />
+    {touched &&
+      (error && <span>{error}</span>)}
+    </div>
   )
 }
 

@@ -9,6 +9,10 @@ import renderRadio from './form/Radio'
 import { reduxForm, Field } from 'redux-form'
 
 class AddTaskForm extends React.Component {
+  required = value => value ? undefined : 'Required'
+  maxLength = max => value => value && value.length > max ? `Must be ${max} characters or less` : undefined
+  maxLength200 = this.maxLength(200)
+
   submit = (values) => {
     const time = values.deadlineTime || '00:00'
     const params = {
@@ -22,11 +26,13 @@ class AddTaskForm extends React.Component {
 
   render() {
     const { handleSubmit, pristine, submitting, reset } = this.props
+    console.log('this.props.categories')
+    console.log(this.props.categories)
 
     return (
       <form onSubmit={handleSubmit(this.submit)}>
         <div style={{width: 400, display: 'flex', flexDirection: 'column'}} >
-          <Field name='title' label='Title' component={MaterialTextField} required />
+          <Field name='title' label='Title' component={MaterialTextField} validate={[ this.required, this.axLength200 ]} required />
           <Field name='description' label='Description' component={MaterialTextField} />
           <Field name="deadlineDate" component="input" type="date" />
           <Field name="deadlineTime" component="input" type="time" />

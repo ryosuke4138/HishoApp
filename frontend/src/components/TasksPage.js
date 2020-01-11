@@ -1,21 +1,28 @@
-import React, { Component } from 'react';
-import Button from '@material-ui/core/Button';
+import React, { Component } from 'react'
+import Button from '@material-ui/core/Button'
 
 import TaskList from './TaskList';
-import { AddTaskReduxForm } from './AddTaskForm'; //demo
-import { TASK_STATUSES } from '../constants/tasks';
+import { AddTaskReduxForm } from './AddTaskForm'
+import { AddCategoryReduxForm } from './AddCategoryForm'
+import { TASK_STATUSES } from '../constants/tasks'
 
 class TasksPage extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      showNewCardForm: false,
+      showNewTaskCardForm: false,
+      showNewCategoryCardForm: false,
     }
+    this.props.fetchCategories()
     this.props.fetchTasks()
   }
 
-  toggleForm = () => {
-    this.setState({ showNewCardForm: !this.state.showNewCardForm });
+  toggleTaskForm = () => {
+    this.setState({ showNewTaskCardForm: !this.state.showNewTaskCardForm });
+  }
+
+  toggleCategoryForm = () => {
+    this.setState({ showNewCategoryCardForm: !this.state.showNewCategoryCardForm });
   }
 
   render() {
@@ -26,15 +33,20 @@ class TasksPage extends Component {
         </div>
       );
     }
-
     return (
       <div>
         <div>
-          <Button variant="contained" color="primary" onClick={this.toggleForm}>
+          <Button variant="contained" color="primary" onClick={this.toggleCategoryForm}>
+            New Category
+          </Button>
+        </div>
+        {this.state.showNewCategoryCardForm && <AddCategoryReduxForm categories={this.props.categories} onCreateCategory={this.props.onCreateCategory}/>}
+        <div>
+          <Button variant="contained" color="primary" onClick={this.toggleTaskForm}>
             New Task
           </Button>
         </div>
-        {this.state.showNewCardForm && <AddTaskReduxForm onCreateTask={this.props.onCreateTask}/>}
+        {this.state.showNewTaskCardForm && <AddTaskReduxForm categories={this.props.categories} onCreateTask={this.props.onCreateTask}/>}
         <div>
           {
             TASK_STATUSES.map(status => {

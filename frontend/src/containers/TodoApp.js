@@ -1,10 +1,12 @@
 import { connect } from 'react-redux'
 import TodoApp from '../components/TodoApp'
 import { createTask, editTask, deleteTask, fetchTasks } from '../actions/TodoApp'
+import { createCategory, editCategory, deleteCategory, fetchCategories } from '../actions/Category'
 
 function mapStateToProps(state) {
   return {
     tasks: state.TodoApp.tasks,
+    categories: state.TodoApp.categories,
     isLoading: state.TodoApp.isLoading,
     error: state.TodoApp.error
   }
@@ -15,15 +17,28 @@ function mapDispatchToProps(dispatch) {
     fetchTasks() {
       dispatch(fetchTasks());
     },
-    onCreateTask({title, description, deadline}) {
+    onCreateTask({title, description, deadline, category}) {
       console.log('onCreateTask')
-      dispatch(createTask(title, description, deadline))
+      dispatch(createTask(title, description, deadline, category))
     },
     onStatusChange(id, status) {
       dispatch(editTask(id, { status }))
     },
     onDeleteTask(id) {
       dispatch(deleteTask(id))
+    },
+    fetchCategories() {
+      dispatch(fetchCategories());
+    },
+    onCreateCategory({name}) {
+      console.log('onCreateCategory')
+      dispatch(createCategory(name))
+    },
+    onChangeCategoryName(id, name) {
+      dispatch(editCategory(id, { name }))
+    },
+    onDeleteCategory(id) {
+      dispatch(deleteCategory(id))
     }
   }
 }
