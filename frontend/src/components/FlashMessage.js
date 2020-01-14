@@ -10,4 +10,4 @@ export default function FlashMessage({message}) {
 
 FlashMessage.defaultProps = {
   message: 'An error occurred',
-};
+}
