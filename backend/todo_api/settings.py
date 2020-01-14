@@ -117,7 +117,7 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.AllowAny',
     ],
-    'DATETIME_FORMAT': "%m/%d/%Y %H:%M:%S",
+    # 'DATETIME_FORMAT': "%m/%d/%Y %H:%M:%S",
     # 'EXCEPTION_HANDLER': 'backend.todo_api.utils.custom_exception_handler'
 }
 

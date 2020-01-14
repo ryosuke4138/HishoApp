@@ -72,14 +72,11 @@ class TasksPage extends Component {
                 <div style={{ margin: "25px 20px 25px 20px" }}>
                   <h2>{status}</h2>
                   <TaskList
-                    key={status}
-                    status={status}
                     tasks={statusTasks}
                     categories={this.props.categories}
                     onStatusChange={this.props.onStatusChange}
                     onStatusCompletedAtChange={this.props.onStatusCompletedAtChange}
                     onDeleteTask={this.props.onDeleteTask}
-                    onDeleteCategory={this.props.onDeleteCategory}
                   />
                 </div>
               );

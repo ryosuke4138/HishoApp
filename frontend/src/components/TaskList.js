@@ -1,50 +1,88 @@
 import React from 'react';
-import { List, Card, Button } from 'antd';
-import { TASK_STATUSES } from '../constants/tasks';
+import { 
+  Card, CardContent, CardActions, Typography, 
+  Button, Select, InputLabel, FormControl, MenuItem,
+} from '@material-ui/core'
+import { TASK_STATUSES } from '../constants/tasks'
 
 const categoryIdToName = (id, categories) => {
   const category = categories.find(c => c.id === id)
   return category ? category.name : null
 }
 
-const TaskList = props => {
-  return (
-    <List
-      grid={{ gutter: 16, column: 4 }}
-      dataSource={props.tasks}
-      renderItem={item => (
-      <List.Item>
-        <Card title={item.title}>
-          <p>{item.description}</p>
-          {item.deadline && <p>deadline: {item.deadline.slice(0,-3)}</p>}
-          {item.category && <p>category: {categoryIdToName(item.category, props.categories)}</p>}
-        </Card>
-        <select 
-          value={item.status} 
-          onChange={(e) => {
-            onStatusChange(e, item.id)
-          }}>
-          {TASK_STATUSES.map(status => (
-            <option key={status} value={status}>{status}</option>
-          ))}
-        </select>
-        <Button type="danger" onClick={()=>{props.onDeleteTask(item.id)}}>
-          Delete Task
-        </Button>
-      </List.Item>
-      )}
-    />
-  )
-  function onStatusChange(e, id) {
-    const status = e.target.value
-    if(status === 'Completed') {
+export default function TaskList({
+  tasks,
+  status,
+  categories,
+  onStatusChange,
+  onStatusCompletedAtChange,
+  onDeleteTask,
+}) {
+  function onStatusChange_(next_status, id) {
+    if(next_status === 'Completed') {
       const d = new Date()
-      const completed_at = d.getFullYear() + '-' + (d.getMonth()+1) + '-' + d.getDate() + 'T' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds()
-      props.onStatusCompletedAtChange(id, status, completed_at)
+      console.log(new Date())
+      console.log(new Date())
+      // const completed_at = d.getFullYear() + '-' + (d.getMonth()+1) + '-' + d.getDate() + 'T' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds() // SIO
+      const completed_at = '2020-1-14T11:33:23'
+      // const completed_at = '01/14/2020 11:33:23'
+      console.log('onStatusChange_')
+      console.log(onStatusCompletedAtChange)
+      console.log(id, next_status, completed_at)
+      onStatusCompletedAtChange(id, next_status, completed_at)
     } else {
-      props.onStatusChange(id, status)
+      console.log('NOT completed')
+      onStatusChange(id, next_status)
     }
   }
-}
 
-export default TaskList
+  return tasks.map((task) => (
+    <Card
+      key={`ranking-item-${task.id}`}
+      style={{ maxWidth: '500px', margin: '16px auto' }}
+    >
+      <CardContent>
+        <Typography type="title">
+          {task.title}
+        </Typography>
+      </CardContent>
+      {task.category && 
+        <CardActions>
+          <Button variant="outlined">
+            {categoryIdToName(task.category, categories)}
+          </Button>
+        </CardActions>
+      }
+      {task.description &&
+        <CardContent>
+          <Typography type="description">
+            {task.description}
+          </Typography>
+        </CardContent>
+      }
+      <CardActions>
+        <FormControl >
+          <InputLabel id="status-select-label">Status</InputLabel>
+          <Select
+            labelId="status-select-label"
+            id="demo-simple-select"
+            value={task.status}
+            onChange={(e) => {
+              const next_status = e.target.value
+              onStatusChange_(next_status, task.id)
+            }}
+          >
+            {TASK_STATUSES.map(status => (
+              <MenuItem key={status} value={status}>{status}</MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+      </CardActions>
+      <CardActions>
+        <Button type="button" onClick={()=>{onDeleteTask(task.id)}}>
+          Delete Task
+        </Button>
+      </CardActions>
+    </Card>
+  ))
+}
