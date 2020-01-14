@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import Button from '@material-ui/core/Button'
+import Fab from '@material-ui/core/Fab'
+import AddIcon from '@material-ui/icons/Add'
 
 import TaskList from './TaskList';
 import { AddTaskReduxForm } from './form/AddTaskForm'
@@ -48,9 +50,9 @@ class TasksPage extends Component {
         />}
 
         <div>
-          <Button variant="contained" color="primary" onClick={this.toggleTaskForm}>
-            New Task
-          </Button>
+          <Fab color="primary" aria-label="add" onClick={this.toggleTaskForm}>
+            <AddIcon />
+          </Fab>
         </div>
         {this.state.showNewTaskCardForm && 
           <AddTaskReduxForm 

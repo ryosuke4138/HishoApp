@@ -11,13 +11,13 @@ import ListItemText from '@material-ui/core/ListItemText'
 import InboxIcon from '@material-ui/icons/MoveToInbox'
 import MailIcon from '@material-ui/icons/Mail'
 
+const drawerWidth = 240
+
 const useStyles = makeStyles({
-  list: {
-    width: 250,
-  },
-  fullList: {
-    width: 'auto',
-  },
+  root: {
+    width: drawerWidth,
+    flexShrink: 0,
+  }
 })
 
 export default function Nav({ className }) {
@@ -38,7 +38,7 @@ export default function Nav({ className }) {
 
   const sideList = () => (
     <div
-      className={classes.list}
+      className={classes.root}
       role="presentation"
       onClick={toggleDrawer(false)}
       onKeyDown={toggleDrawer(false)}

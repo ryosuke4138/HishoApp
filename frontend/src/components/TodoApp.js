@@ -1,7 +1,15 @@
 import React from 'react';
+import { makeStyles } from '@material-ui/core/styles'
 import PropTypes from 'prop-types'
 import TasksPage from './TasksPage';
 import FlashMessage from './FlashMessage';
+// import classes from '*.module.css';
+
+const classes = makeStyles({
+  root: {
+    display: 'flex',
+  }
+})
 
 export default function TodoApp({
   tasks, 
@@ -18,7 +26,7 @@ export default function TodoApp({
   onDeleteCategory,
 }) {
   return (
-    <div>
+    <div className={classes.root}>
       {error && <FlashMessage message={error} />}
       <div>
         <TasksPage 
