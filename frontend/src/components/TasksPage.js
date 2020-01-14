@@ -18,11 +18,11 @@ class TasksPage extends Component {
   }
 
   toggleTaskForm = () => {
-    this.setState({ showNewTaskCardForm: !this.state.showNewTaskCardForm });
+    this.setState({ showNewTaskCardForm: !this.state.showNewTaskCardForm })
   }
 
   toggleCategoryForm = () => {
-    this.setState({ showNewCategoryCardForm: !this.state.showNewCategoryCardForm });
+    this.setState({ showNewCategoryCardForm: !this.state.showNewCategoryCardForm })
   }
 
   render() {
@@ -67,7 +67,7 @@ class TasksPage extends Component {
             TASK_STATUSES.map(status => {
               const statusTasks = this.props.tasks.filter(
                 task => task.status === status
-              );
+              )
               return (
                 <div style={{ margin: "25px 20px 25px 20px" }}>
                   <h2>{status}</h2>
@@ -79,13 +79,13 @@ class TasksPage extends Component {
                     onDeleteTask={this.props.onDeleteTask}
                   />
                 </div>
-              );
+              )
             })
           }
         </div>
       </div>
-    );
+    )
   }
 }
 
-export default TasksPage;
+export default TasksPage

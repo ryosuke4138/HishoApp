@@ -10,27 +10,27 @@ export default (state = initialState, action) => {
       return {
         ...state,
         isLoading: true,
-      };
+      }
     }
     case 'FETCH_TASKS_SUCCEEDED': {
       return {
         ...state,
         tasks: action.payload.tasks,
         isLoading: false,
-      };
+      }
     }
     case 'FETCH_TASKS_FAILED': {
       return {
         ...state,
         isLoading: false,
         error: action.payload.error,
-      };
+      }
     }
     case 'CREATE_TASK_SUCCEEDED': {
       return {
         ...state,
         tasks: state.tasks.concat(action.payload.task),
-      };
+      }
     }
     case 'EDIT_TASK_SUCCEEDED': {
       const { payload } = action;
@@ -40,11 +40,11 @@ export default (state = initialState, action) => {
         }
 
         return task;
-      });
+      })
       return {
         ...state,
         tasks: nextTasks,
-      };
+      }
     }
     case 'DELETE_TASK_SUCCEEDED': {
       const { payload } = action;

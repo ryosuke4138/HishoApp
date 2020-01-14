@@ -1,11 +1,11 @@
 import React from 'react';
 
-export default function FlashMessage(props) {
+export default function FlashMessage({message}) {
   return (
     <div>
-      {props.message}
+      <p>error: {message}</p>
     </div>
-  );
+  )
 }
 
 FlashMessage.defaultProps = {
